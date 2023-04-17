@@ -1,6 +1,5 @@
 package sg.edu.nus.iss;
 
-import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -18,7 +17,7 @@ public class App
         List<String> cart = new ArrayList<>();
 
         // Print welcome message
-        System.out.print("Good day welcome to your Shopping cart!!!\n> ");
+        System.out.print("~ Good day welcome to your Shopping cart!!!\n");
         // Allow user to enter keyboard input
         // Console cons = System.console();
 
@@ -27,16 +26,15 @@ public class App
         try (Scanner scan = new Scanner(System.in)) {
             while(!scan.hasNext("exit")){
             String commandGiven = scan.next();
-            String fruit = "";
             // If input is "list" and list is length 0 print "Your cart is empty"
             if (commandGiven.equals("list")) {
                 if (cart.size() == 0) {
-                    System.out.print("Its empty lmao.\n> ");
+                    System.out.print("~ Its empty lmao.\n");
                 }
                 // If list has items, print "1. FRUIT \n 2. FRUIT2 \n..."
                 else {
                     for (int i = 0; i < cart.size(); i++) {
-                        System.out.printf("%d. %s\n> ", (i+1), cart.get(i));
+                        System.out.printf("%d. %s", (i+1), cart.get(i));
                     }
                 }
             }
@@ -44,18 +42,20 @@ public class App
             // Add fruit logic
             if (commandGiven.equals("add")) {
                 // If added FRUIT already exists, print "You have FRUIT in your cart"
-                fruit = scan.nextLine().trim();
-                if (cart.contains(fruit)) {
-                    System.out.printf("You already have %s in your cart :P\n> ", fruit);
+                // loop through fruit array to see which fruits alr exist and add those that are not
+                if (scan.hasNextLine()) {
+                    String[] tempFruitArray = scan.nextLine().trim().split(", ");
+                    for (String fruit: tempFruitArray) {
+                        if (cart.contains(fruit)) {
+                            System.out.printf("~ You already have %s in your cart :P\n", fruit);
+                        }
+                        else {
+                            // If input is "add FRUIT", print "FRUIT added to cart"
+                            cart.add(fruit);
+                            System.out.printf("~ YUMMY %s has been added to your cart!\n", fruit);
+                        }
+                    }
                 }
-                else {
-                    // If input is "add FRUIT", print "FRUIT added to cart"
-                    cart.add(fruit);
-                    System.out.printf("YUMMY %s has been added to your cart!\n> ", fruit);
-                }
-                // Split the .nextLine input into a temp array and loop through that (adding and checking)
-
-                // If more than one FRUIT e.g. add orange, pear, print above on individual lines. CHECK FOR COMMAS TO SPLIT INPUT
             }}
     
             // Delete fruit logic
@@ -63,7 +63,7 @@ public class App
             // if input is "delete INT", remove fruit at specified index and print "FRUIT_AT_INDEX removed from cart"
         }
         catch (Exception e) {
-            System.out.println("Error: " + e);
+            System.out.println("~ Error: " + e);
         }
     }
 }
