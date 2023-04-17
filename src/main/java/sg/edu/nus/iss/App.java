@@ -60,14 +60,15 @@ public class App
                 // Delete fruit logic
                 if (commandGiven.equals("remove")) {
                     Integer inputIndex = Integer.parseInt(scan.nextLine().trim());
-                    Integer idx = inputIndex - 1;
+                    int idx = inputIndex - 1;
                     // If specified index does not exist, print "Incorrect item index"
-                    if (idx > (cart.size() + 1) || idx < 0) {
+                    if (cart.size() == 0 || idx > (cart.size() + 1) || idx < 0) {
                         System.out.print("~ Item index does not exist\n");
                     }
                     else {
-                        cart.remove(1);
-                        System.out.printf("~ %s removed from cart\n", cart.get(idx));
+                        String chosenFruit = cart.get(idx);
+                        System.out.printf("~ %s removed from cart\n", chosenFruit);
+                        cart.remove(idx);
                     }
                 }
             }
