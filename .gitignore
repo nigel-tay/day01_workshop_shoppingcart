@@ -1,1 +1,5 @@
+# Target directory
 target/
+
+# Compiled class files
+src/main/java.sg/edu/nus/iss/sg/edu/nus/iss/**
