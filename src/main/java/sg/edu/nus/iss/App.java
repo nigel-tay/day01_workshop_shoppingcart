@@ -26,6 +26,15 @@ public class App
         try (Scanner scan = new Scanner(System.in)) {
             while(!scan.hasNext("exit")){
                 String commandGiven = scan.next();
+
+                // Helper function
+                if (commandGiven.equals("help")) {
+                    System.out.println("~ Here are some commands you may input:");
+                    System.out.println("'list'");
+                    System.out.println("'add <fruit name>, ...'");
+                    System.out.println("'remove <fruit index>'");
+                }
+
                 // If input is "list" and list is length 0 print "Your cart is empty"
                 if (commandGiven.equals("list")) {
                     if (cart.size() == 0) {
